@@ -1,5 +1,4 @@
-
-import Reminder from "../models/Reminder"
+import Reminder from "../models/reminder"
 
 interface ReminderListProps {
     reminders: Reminder[]
