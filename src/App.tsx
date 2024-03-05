@@ -28,11 +28,18 @@ function App() {
     setReminders(reminders.filter(reminder => reminder.id !== id))
   }
 
+  const addReminder = async (title: string) => {
+    const newReminder = await reminderService.addReminder(title)
+    setReminders([ newReminder, ...reminders ])
+    
+  }
 
   return (
     <>
       <h1>Reminders TypeScript - React</h1>
-      <NewReminder />
+      <NewReminder 
+        onAddReminder={addReminder}
+      />
       <ReminderList 
         reminders={reminders}
         onRemoveReminder={removeReminder}
