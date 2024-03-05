@@ -1,13 +1,18 @@
 import Reminder from "../models/reminder"
 
 interface ReminderListProps {
-    reminders: Reminder[]
+    reminders: Reminder[],
+    onRemoveReminder: (id: number) => void,
 }
 
-const ReminderList = ({reminders}: ReminderListProps) => {
+const ReminderList = ({reminders, onRemoveReminder}: ReminderListProps) => {
   return (
-    <ul>
-        {reminders.map(reminder => <li key={reminder.id}>{reminder.title}</li>)}
+    <ul className="list-group">
+        {reminders.map(reminder => 
+          <li className="list-group-item" key={reminder.id}>{reminder.title}
+            <button onClick={() => onRemoveReminder(reminder.id)} className="btn btn-outline-danger mx-2 rounded-pill">Delete</button>
+          </li>
+        )}
     </ul>
   )
 }

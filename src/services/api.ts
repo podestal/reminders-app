@@ -1,5 +1,4 @@
 import axios from "axios";
-import Reminder from "../models/reminder";
 
 class ReminderService {
     http = axios.create({
@@ -7,12 +6,12 @@ class ReminderService {
     })
 
     async getReminders() {
-        const response = await this.http.get<Reminder>('todos')
+        const response = await this.http.get('todos')
         return response.data
     }
 
     async addReminder(title: string) {
-        const response = await this.http.post<Reminder>('todos', { title })
+        const response = await this.http.post('todos', { title })
         return response.data
     }
 

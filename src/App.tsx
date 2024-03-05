@@ -1,7 +1,8 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './App.css'
 import ReminderList from './components/ReminderList'
 import Reminder from './models/reminder'
+import reminderService from './services/api'
 
 // const reminders: Reminder[] = [
 //   {id: 1, title: 'Reminder 1'},
@@ -11,11 +12,20 @@ import Reminder from './models/reminder'
 
 function App() {
 
-  const [reminders, setReminders] = useState<Reminder[]>([
-    {id: 1, title: 'Reminder 1'},
-    {id: 2, title: 'Reminder 2'},
-    {id: 3, title: 'Reminder 3'}
-  ])
+  const [reminders, setReminders] = useState<Reminder[]>([])
+
+  useEffect(() => {
+    loadReminders()
+  }, [])
+
+  const loadReminders = async() => {
+    const reminders = await reminderService.getReminders()
+    setReminders(reminders)
+  }
+
+  const removeReminder = (id: number) => {
+    setReminders(reminders.filter(reminder => reminder.id !== id))
+  }
 
 
   return (
@@ -23,6 +33,7 @@ function App() {
       <h1>Reminders TypeScript - React</h1>
       <ReminderList 
         reminders={reminders}
+        onRemoveReminder={removeReminder}
       />
     </>
   )
