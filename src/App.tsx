@@ -3,6 +3,7 @@ import './App.css'
 import ReminderList from './components/ReminderList'
 import Reminder from './models/reminder'
 import reminderService from './services/api'
+import NewReminder from './components/NewReminder'
 
 // const reminders: Reminder[] = [
 //   {id: 1, title: 'Reminder 1'},
@@ -31,6 +32,7 @@ function App() {
   return (
     <>
       <h1>Reminders TypeScript - React</h1>
+      <NewReminder />
       <ReminderList 
         reminders={reminders}
         onRemoveReminder={removeReminder}
